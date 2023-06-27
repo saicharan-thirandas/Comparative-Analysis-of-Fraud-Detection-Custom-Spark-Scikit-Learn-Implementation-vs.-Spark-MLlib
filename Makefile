@@ -12,6 +12,7 @@ local.master=local[4]
 local.input=input
 local.output=output
 local.conf=conf
+local.src=src
 
 # Pseudo-Cluster Execution
 hdfs.user.name=joe
@@ -25,6 +26,7 @@ aws.output=output
 aws.log.dir=log
 aws.num.nodes=1
 aws.conf=conf
+aws.src=src
 aws.instance.type=m5.xlarge
 # -----------------------------------------------------------
 
@@ -41,6 +43,10 @@ upload-input-aws: make-bucket
 upload-conf-aws: make-bucket
 	aws s3 sync ${local.conf} s3://${aws.bucket.name}/${aws.conf}
 
+# Upload data to S3 input dir.
+upload-src-aws: make-bucket
+	aws s3 sync ${local.src} s3://${aws.bucket.name}/${aws.src}
+
 
 # Delete S3 output dir.
 delete-output-aws:
@@ -51,13 +57,13 @@ upload-app-aws:
 	aws s3 cp ${jar.name} s3://${aws.bucket.name}
 
 # Main EMR launch.
-aws:
+aws: upload-src-aws upload-conf-aws
 	aws emr create-cluster \
 		--name "FollowerCountCombMain - Rep - data = 8" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 		--applications Name=Hadoop Name=Spark \
-		--bootstrap-actions '[{"Path":"s3://${aws.bucket.name}/install-python-dependencies.sh","Name":"Install Python Dependencies"}]' \
+		--bootstrap-actions '[{"Path":"s3://${aws.bucket.name}/conf/install-python-dependencies.sh","Name":"Install Python Dependencies"}]' \
    		--steps Type=Spark,Name="MyPySparkStep",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,--master,yarn,s3://${aws.bucket.name}/run.py] \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
