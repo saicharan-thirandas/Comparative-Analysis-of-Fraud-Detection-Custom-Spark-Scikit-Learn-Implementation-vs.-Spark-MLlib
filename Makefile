@@ -72,7 +72,7 @@ aws: upload-src-aws upload-conf-aws
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 		--applications Name=Hadoop Name=Spark \
 		--bootstrap-actions '[{"Path":"s3://${aws.bucket.name}/conf/install-python-dependencies.sh","Name":"Install Python Dependencies"}]' \
-   		--steps Type=Spark,Name="MyPySparkStep",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,--master,yarn,s3://${aws.bucket.name}/src/${spark-main-file}] \
+   		--steps Type=Spark,Name="MyPySparkStep",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,--master,yarn,s3://${aws.bucket.name}/${spark-main-file}] \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \
