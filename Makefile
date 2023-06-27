@@ -4,15 +4,24 @@
 # -----------------------------------------------------------
 spark.root=/usr/local/spark-3.4.0-bin-without-hadoop
 hadoop.root=/usr/local/hadoop-3.3.5
-app.name=FollowerCountRS-RDD
-jar.name=spark-demo.jar
-maven.jar.name=spark-demo-1.0.jar
-job.name=wc.FollowerCountJoinMain
+
+app.name=Spark-Base-Ensemble
+spark-main-file = src/spark-base/run.py
+
+#app.name=Spark-MLLib-Ensemble
+#spark-main-file = src/spark-mllib/run.py
+
+
+
+
+#local paths
 local.master=local[4]
 local.input=input
 local.output=output
 local.conf=conf
 local.src=src
+
+
 
 # Pseudo-Cluster Execution
 hdfs.user.name=joe
@@ -59,12 +68,12 @@ upload-app-aws:
 # Main EMR launch.
 aws: upload-src-aws upload-conf-aws
 	aws emr create-cluster \
-		--name "FollowerCountCombMain - Rep - data = 8" \
+		--name ${app.name} \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 		--applications Name=Hadoop Name=Spark \
 		--bootstrap-actions '[{"Path":"s3://${aws.bucket.name}/conf/install-python-dependencies.sh","Name":"Install Python Dependencies"}]' \
-   		--steps Type=Spark,Name="MyPySparkStep",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,--master,yarn,s3://${aws.bucket.name}/run.py] \
+   		--steps Type=Spark,Name="MyPySparkStep",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,--master,yarn,s3://${aws.bucket.name}/${spark-main-file}] \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \
