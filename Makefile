@@ -9,8 +9,10 @@ jar.name=spark-demo.jar
 maven.jar.name=spark-demo-1.0.jar
 job.name=wc.FollowerCountJoinMain
 local.master=local[4]
-local.input=data
+local.input=input
 local.output=output
+local.conf=conf
+
 # Pseudo-Cluster Execution
 hdfs.user.name=joe
 hdfs.input=input
@@ -22,6 +24,7 @@ aws.input=input
 aws.output=output
 aws.log.dir=log
 aws.num.nodes=1
+aws.conf=conf
 aws.instance.type=m5.xlarge
 # -----------------------------------------------------------
 
@@ -33,7 +36,12 @@ make-bucket:
 # Upload data to S3 input dir.
 upload-input-aws: make-bucket
 	aws s3 sync ${local.input} s3://${aws.bucket.name}/${aws.input}
-	
+
+# Upload data to S3 input dir.
+upload-conf-aws: make-bucket
+	aws s3 sync ${local.conf} s3://${aws.bucket.name}/${aws.conf}
+
+
 # Delete S3 output dir.
 delete-output-aws:
 	aws s3 rm s3://${aws.bucket.name}/ --recursive --exclude "*" --include "${aws.output}*"
