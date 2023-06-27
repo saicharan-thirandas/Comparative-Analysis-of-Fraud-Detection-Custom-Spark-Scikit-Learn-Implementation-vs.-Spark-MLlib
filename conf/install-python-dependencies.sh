@@ -1,10 +1,14 @@
 #!/bin/bash
 
+sudo pip3 install fsspec s3fs
+
+
 # Install Pandas
-pip3 install pandas
+sudo pip3 install pandas
+
 
 # Install NumPy
-pip3 install numpy
+sudo pip3 install numpy
 
 # Install scikit-learn
-pip3 install scikit-learn
+sudo pip3 install scikit-learn
