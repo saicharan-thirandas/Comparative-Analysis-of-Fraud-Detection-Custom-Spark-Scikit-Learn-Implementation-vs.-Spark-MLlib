@@ -35,7 +35,7 @@ aws.log.dir=log
 aws.num.nodes=1
 aws.conf=conf
 aws.src=src
-aws.instance.type=m5.xlarge
+aws.instance.type=m4.large
 # -----------------------------------------------------------
 
 
