@@ -207,7 +207,7 @@ class KeyValuePartitioner:
         return key
 
     def numPartitions(self):
-        return len_parameters # Number of desired partitions
+        return 10 # Number of desired partitions
 
 #change everything according to model_params
 model_list = voting_classifier_models_with_cwts
@@ -226,7 +226,6 @@ y_pred = model_rdd_repar.map(run_models_on_all_partitons)
 
 partition_count = model_rdd_repar.getNumPartitions()
 print("RDD Partition Count:", partition_count)
-print(" ACTUAL Count:", len_parameters)
 
 results_list = y_pred.collect()
 
