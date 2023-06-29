@@ -18,7 +18,6 @@ df=spark.read.csv(s3_path, inferSchema=True, header=True)
 
 
 #check the schema
-#df = df.limit(1000)
 df.printSchema()
 
 df.head(10)
@@ -73,16 +72,16 @@ model1.setImpurity("gini")  # Impurity measure ("gini" or "entropy")
 model1.setMaxDepth(10)  # Maximum depth of the tree
 model1.setMaxBins(32)  # Maximum number of bins
 
-model1 = model1.fit(train_data)
+model1.fit(train_data)
 
 model2=RandomForestClassifier()
 # Set the parameters
 model2.setImpurity("gini")
-model2.setMaxDepth(20)
+model2.setMaxDepth(5)
 model2.setMaxBins(32)
 model2.setNumTrees(100)
 
-model2 = model2.fit(train_data)
+model2.fit(train_data)
 
 dtPredictions1 = model1.transform(test_data)
 dtPredictions2 = model2.transform(test_data)

@@ -6,10 +6,11 @@ spark.root=/usr/local/spark-3.4.0-bin-without-hadoop
 hadoop.root=/usr/local/hadoop-3.3.5
 
 app.name=Spark-Base-Ensemble
-spark-main-file = src/spark-base/run.py
+spark-main-file = src/spark-base/pyspark-spark-scikit.py
+
 
 #app.name=Spark-MLLib-Ensemble
-#spark-main-file = src/spark-mllib/run.py
+#spark-main-file = src/spark-mllib/pyspark_spark_mllib.py
 
 
 
@@ -32,10 +33,10 @@ aws.bucket.name=cs6240-project-bucket-saicharan-pyspark
 aws.input=input
 aws.output=output
 aws.log.dir=log
-aws.num.nodes=1
+aws.num.nodes=2
 aws.conf=conf
 aws.src=src
-aws.instance.type=m4.large
+aws.instance.type=m4.xlarge
 # -----------------------------------------------------------
 
 
