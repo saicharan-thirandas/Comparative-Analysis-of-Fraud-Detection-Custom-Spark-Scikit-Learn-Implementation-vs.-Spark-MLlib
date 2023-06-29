@@ -222,10 +222,8 @@ print("RDD Partition Count:", partition_count)
 
 results_list = y_pred.collect()
 
-
 #voting classifier
 y_test = df_test["target"]
-
 
 
 #Transpose the results for majority prediction
