@@ -1,16 +1,17 @@
-# Makefile for Spark WordCount project.
+# Makefile for
 
 # Customize these paths for your environment.
 # -----------------------------------------------------------
 spark.root=/usr/local/spark-3.4.0-bin-without-hadoop
 hadoop.root=/usr/local/hadoop-3.3.5
 
-app.name=Spark-Base-Ensemble
-spark-main-file = src/spark-base/pyspark-spark-scikit.py
 
+# Customize the app to run - Spark + Scikit Ensemble vs Spark MLLib - Ensemble.
 
-#app.name=Spark-MLLib-Ensemble
-#spark-main-file = src/spark-mllib/pyspark_spark_mllib.py
+#app.name=Spark-Base-Ensemble
+#spark-main-file = src/spark-base/pyspark-spark-scikit.py
+app.name=Spark-MLLib-Ensemble
+spark-main-file = src/spark-mllib/pyspark_spark_mllib.py
 
 
 
@@ -27,13 +28,15 @@ local.src=src
 hdfs.user.name=joe
 hdfs.input=input
 hdfs.output=output
+
+
 # AWS EMR Execution
 aws.emr.release=emr-6.10.0
 aws.bucket.name=cs6240-project-bucket-saicharan-pyspark
 aws.input=input
 aws.output=output
 aws.log.dir=log
-aws.num.nodes=2
+aws.num.nodes=1
 aws.conf=conf
 aws.src=src
 aws.instance.type=m4.xlarge
