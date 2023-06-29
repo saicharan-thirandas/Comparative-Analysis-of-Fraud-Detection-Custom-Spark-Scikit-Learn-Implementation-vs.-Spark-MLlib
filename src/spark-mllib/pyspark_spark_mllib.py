@@ -7,6 +7,13 @@ from pyspark.ml.classification import DecisionTreeClassifier, RandomForestClassi
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, roc_curve
 from pyspark.sql import SparkSession
+import time
+
+
+# Your program code goes here
+# Replace the following code with your actual program
+for i in range(1000000):
+    _ = i * i
 
 
 def caluculate_metrics_on_prediction(y_pred,y_actual):
@@ -46,6 +53,7 @@ spark=SparkSession.builder.getOrCreate()
 
 df=spark.read.csv(s3_path, inferSchema=True, header=True)
 
+df = df.limit(1000)
 #check the schema
 df.printSchema()
 
@@ -89,6 +97,10 @@ test_data = test.select(
 
 
 
+print(" Decision Tree Classifier Results : ")
+# Record the start time
+start_time = time.time()
+
 #Run Decision Tree - with parameters
 model_decision_tree=DecisionTreeClassifier()
 # Set the parameters
@@ -104,9 +116,22 @@ y_test = df_predictions_decison_tree.select('label').rdd.flatMap(lambda x: x).co
 
 caluculate_metrics_on_prediction(y_pred,y_test)
 
+# Record the end time
+end_time = time.time()
 
+# Calculate the total execution time
+execution_time = end_time - start_time
+# Print the start and end time
+print("Start Time: ", time.ctime(start_time))
+print("End Time: ", time.ctime(end_time))
+print("Execution Time: ", execution_time, "seconds")
 
 #Run Random Forest Classifier - with parameters
+print(" ######################################## ")
+
+print(" Random Forest Classifier  Results : ")
+
+start_time = time.time()
 
 model_random_forest=RandomForestClassifier()
 # Set the parameters
@@ -124,6 +149,15 @@ y_test = df_predictions_random_forest.select('label').rdd.flatMap(lambda x: x).c
 
 caluculate_metrics_on_prediction(y_pred,y_test)
 
+# Record the end time
+end_time = time.time()
+
+# Calculate the total execution time
+execution_time = end_time - start_time
+# Print the start and end time
+print("Start Time: ", time.ctime(start_time))
+print("End Time: ", time.ctime(end_time))
+print("Execution Time: ", execution_time, "seconds")
 
 
 
