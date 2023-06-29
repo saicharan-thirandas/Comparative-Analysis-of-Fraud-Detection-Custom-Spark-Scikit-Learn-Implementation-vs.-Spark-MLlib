@@ -11,4 +11,4 @@ sudo pip3 install pandas
 sudo pip3 install numpy
 
 # Install scikit-learn
-sudo pip3 install scikit-learn
+sudo pip3 install scikit-learn==1.2.2
