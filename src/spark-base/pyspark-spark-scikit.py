@@ -233,8 +233,7 @@ majority_predictions = [Counter(sublist).most_common(1)[0][0] for sublist in tra
 
 
 
-#Perform error analysis and
-
+#Perform error analysis.
 y_pred= majority_predictions
 y_actual = y_test
 
