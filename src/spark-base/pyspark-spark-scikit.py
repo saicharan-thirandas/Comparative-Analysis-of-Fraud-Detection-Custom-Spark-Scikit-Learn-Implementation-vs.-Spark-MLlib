@@ -148,10 +148,10 @@ voting_classifier_models_with_cwts = [lr1,lr2,lr3,lr4,lr5,lr6,lr8,lr9,lr10,lr11,
 #ensemnble 2
 base_decision_tree_confiruation  = [DecisionTreeClassifier(max_depth =10, min_samples_split= 5, class_weight=class_weights)]
 print(base_decision_tree_confiruation)
-random_forest_classifier_models = base_decision_tree_confiruation*no_of_trees
 
 #change the configuration here
 no_of_trees = 5
+random_forest_classifier_models = base_decision_tree_confiruation*no_of_trees
 model_list = random_forest_classifier_models
 bagging = True
 
