@@ -114,11 +114,6 @@ dtc6 = DecisionTreeClassifier(criterion="entropy", class_weight=class_weights, m
 dtc7 = DecisionTreeClassifier(criterion="entropy", class_weight=class_weights, max_depth=35, min_samples_split=40)
 dtc8 = DecisionTreeClassifier(criterion="entropy", class_weight=class_weights, max_depth=70, min_samples_split=24)
 
-dtc9 = DecisionTreeClassifier(criterion="log_loss", class_weight=class_weights, max_depth=5, min_samples_split=10)
-dtc10 = DecisionTreeClassifier(criterion="log_loss", class_weight=class_weights, max_depth=20, min_samples_split=50)
-dtc11 = DecisionTreeClassifier(criterion="log_loss", class_weight=class_weights, max_depth=35, min_samples_split=40)
-dtc12 = DecisionTreeClassifier(criterion="log_loss", class_weight=class_weights, max_depth=70, min_samples_split=24)
-
 # 'kernel':('linear', 'poly', 'rbf', 'sigmoid', 'precomputed'), 'C':[1, 10]
 # svc1 = SVC(kernel="linear" , C=1, class_weight=class_weights)
 # svc2 = SVC(kernel="linear" , C=10, class_weight=class_weights)
@@ -142,7 +137,7 @@ dtc12 = DecisionTreeClassifier(criterion="log_loss", class_weight=class_weights,
 
 # ensemnble 1
 voting_classifier_models_with_cwts = [lr1,lr2,lr3,lr4,lr5,lr6,lr8,lr9,lr10,lr11,lr12,lr13,lr14,lr15,lr16,lr17,lr17,
-                                      dtc1,dtc2,dtc3,dtc4,dtc5,dtc6,dtc7,dtc8,dtc9,dtc10,dtc11,dtc12]
+                                      dtc1,dtc2,dtc3,dtc4,dtc5,dtc6,dtc7,dtc8]
                                       # svc1,svc2,svc3,svc4,svc5,svc6,svc7,svc8,svc9,svc10,svc11,svc12]#,svc13,svc14,svc15
 
 #ensemnble 2
@@ -152,8 +147,8 @@ print(base_decision_tree_confiruation)
 #change the configuration here
 no_of_trees = 5
 random_forest_classifier_models = base_decision_tree_confiruation*no_of_trees
-model_list = random_forest_classifier_models
-bagging = True
+model_list = voting_classifier_models_with_cwts
+bagging = False
 
 
 def bagging_selection(train_data, test_data, target):
@@ -210,7 +205,6 @@ class KeyValuePartitioner:
         return 10 # Number of desired partitions
 
 #change everything according to model_params
-model_list = voting_classifier_models_with_cwts
 no_of_models = len(model_list)
 
 model_with_key_wts = [ (index,value) for index, value in enumerate(model_list) ]
