@@ -86,7 +86,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 #df_all - current df_train to df_all
-df_all = pd.read_csv(s3_path, nrows=1000)
+df_all = pd.read_csv(s3_path)
 df_all = df_all.rename(columns={'isFraud': 'target'})
 
 
@@ -196,9 +196,8 @@ no_of_trees = 5
 random_forest_classifier_models = base_decision_tree_confiruation*no_of_trees
 
 # Ensemble Type to be execulted
-model_list = voting_classifier_models_with_cwts
+model_list = random_forest_classifier_models
 bagging = False
-
 
 
 
@@ -214,6 +213,7 @@ model_rdd = spark.sparkContext.parallelize(model_with_key_index)
 custom_partitioner = KeyValuePartitioner()
 model_rdd_repar = model_rdd.partitionBy(numPartitions= no_of_models, partitionFunc=custom_partitioner.get_partition)
 
+#Use model to run on each partition
 y_pred = model_rdd_repar.map(run_models_on_all_partitons)
 
 partition_count = model_rdd_repar.getNumPartitions()
