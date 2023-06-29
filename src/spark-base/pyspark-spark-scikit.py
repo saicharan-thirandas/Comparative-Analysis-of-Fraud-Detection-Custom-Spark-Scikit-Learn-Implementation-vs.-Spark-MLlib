@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 #pyspark and other libraries
 from pyspark.sql import SparkSession
 from pyspark.sql import SparkSession
@@ -196,6 +194,8 @@ print(base_decision_tree_confiruation)
 # Configurae the base classifiers and count here -
 no_of_trees = 5
 random_forest_classifier_models = base_decision_tree_confiruation*no_of_trees
+
+# Ensemble Type to be execulted
 model_list = voting_classifier_models_with_cwts
 bagging = False
 
@@ -207,7 +207,6 @@ no_of_models = len(model_list)
 
 # converts [model1,model2,model3...] to [(0,model1) , (1,modl2)...]
 model_with_key_index = [ (index,value) for index, value in enumerate(model_list) ]
-
 model_rdd = spark.sparkContext.parallelize(model_with_key_index)
 
 
@@ -228,12 +227,13 @@ y_test = df_test["target"]
 
 #Transpose the results for majority prediction
 transposed__result_list = list(map(list, zip(*results_list)))
-print(transposed__result_list)
 
 #Perform voting and pick the majority predction
 majority_predictions = [Counter(sublist).most_common(1)[0][0] for sublist in transposed__result_list]
-print(majority_predictions)
 
+
+
+#Perform error analysis and
 
 y_pred= majority_predictions
 y_actual = y_test
