@@ -32,7 +32,7 @@ def bagging_selection(train_data, test_data, target):
     columns_to_exclude = [target]
 
     #Randomly sample few columns to select.
-    columns_to_select = [col for col in np.random.choice(train_data.columns, random.randint(2, num_columns)) if col not in columns_to_exclude]
+    columns_to_select = [col for col in np.random.choice(train_data.columns, random.randint(3, num_columns)) if col not in columns_to_exclude]
     columns_to_select.append(columns_to_exclude[0])
 
     # Sample the selected columns
