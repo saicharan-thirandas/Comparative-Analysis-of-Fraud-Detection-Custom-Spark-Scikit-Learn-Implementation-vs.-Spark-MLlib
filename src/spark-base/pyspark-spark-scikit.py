@@ -192,12 +192,12 @@ print(base_decision_tree_confiruation)
 
 
 # Configurae the base classifiers and count here -
-no_of_trees = 5
+no_of_trees = 100
 random_forest_classifier_models = base_decision_tree_confiruation*no_of_trees
 
 # Ensemble Type to be execulted
 model_list = random_forest_classifier_models
-bagging = False
+bagging = True
 
 
 
