@@ -53,7 +53,6 @@ spark=SparkSession.builder.getOrCreate()
 
 df=spark.read.csv(s3_path, inferSchema=True, header=True)
 
-df = df.limit(1000)
 #check the schema
 df.printSchema()
 
@@ -105,7 +104,7 @@ start_time = time.time()
 model_decision_tree=DecisionTreeClassifier()
 # Set the parameters
 model_decision_tree.setImpurity("gini")  # Impurity measure ("gini" or "entropy")
-model_decision_tree.setMaxDepth(10)  # Maximum depth of the tree
+model_decision_tree.setMaxDepth(20)  # Maximum depth of the tree
 model_decision_tree.setMaxBins(32)  # Maximum number of bins
 
 model_decision_tree = model_decision_tree.fit(train_data)
@@ -136,9 +135,9 @@ start_time = time.time()
 model_random_forest=RandomForestClassifier()
 # Set the parameters
 model_random_forest.setImpurity("gini")
-model_random_forest.setMaxDepth(30)
+model_random_forest.setMaxDepth(20)
 model_random_forest.setMaxBins(32)
-model_random_forest.setNumTrees(20)
+model_random_forest.setNumTrees(100)
 
 model_random_forest = model_random_forest.fit(train_data)
 
