@@ -1,0 +1,49 @@
+root
+ |-- step: integer (nullable = true)
+ |-- type: string (nullable = true)
+ |-- amount: double (nullable = true)
+ |-- nameOrig: string (nullable = true)
+ |-- oldbalanceOrg: double (nullable = true)
+ |-- newbalanceOrig: double (nullable = true)
+ |-- nameDest: string (nullable = true)
+ |-- oldbalanceDest: double (nullable = true)
+ |-- newbalanceDest: double (nullable = true)
+ |-- isFraud: integer (nullable = true)
+ |-- isFlaggedFraud: integer (nullable = true)
+
++-------+-------+
+|isFraud|  count|
++-------+-------+
+|      1|   1613|
+|      0|1271224|
++-------+-------+
+
+ Decision Tree Classifier Results : 
+Confusion Matrix:
+[[1271193      31]
+ [    473    1140]]
+Accuracy: 0.999604034137914
+F1 Score: 0.8189655172413792
+False Positive Rate (FPR): 2.438594614324462e-05
+True Positive Rate (TPR): 0.7067575945443273
+Precision: 0.9735269000853971
+Recall: 0.7067575945443273
+Specificity: 0.9999756140538567
+Start Time:  Thu Jun 29 23:42:38 2023
+End Time:  Thu Jun 29 23:44:50 2023
+Execution Time:  132.1473069190979 seconds
+ ######################################## 
+ Random Forest Classifier  Results : 
+Confusion Matrix:
+[[1271215       9]
+ [    478    1135]]
+Accuracy: 0.9996173901292938
+F1 Score: 0.8233587232499092
+False Positive Rate (FPR): 7.0797908157806965e-06
+True Positive Rate (TPR): 0.703657780533168
+Precision: 0.9921328671328671
+Recall: 0.703657780533168
+Specificity: 0.9999929202091842
+Start Time:  Thu Jun 29 23:44:50 2023
+End Time:  Fri Jun 30 00:20:10 2023
+Execution Time:  2120.4566180706024 seconds
