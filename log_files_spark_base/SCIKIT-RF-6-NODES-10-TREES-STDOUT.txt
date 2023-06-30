@@ -1,0 +1,18 @@
+[DecisionTreeClassifier(class_weight={0: 0.5006484701592583,
+                                     1: 386.0227514030032},
+                       max_depth=10, min_samples_split=5)]
+RDD Partition Count: 10
+Confusion Matrix:
+[[1239222   31682]
+ [    278    1342]]
+Accuracy: 0.9748845601340328
+F1 Score: 0.07747373282530887
+False Positive Rate (FPR): 0.02492871216079263
+True Positive Rate (TPR): 0.828395061728395
+False Negative (FN): 278
+True Negative (TN): 1239222
+False Positive (FN): 31682
+True Positive (TN): 1342
+Precision: 0.04063711240310078
+Recall: 0.828395061728395
+Specificity: 0.9750712878392074

@@ -20,7 +20,7 @@ from sklearn.metrics import accuracy_score, mean_squared_error
 
 
 #Bucket path to read the input
-s3_path = "s3://cs6240-project-bucket-saicharan-pyspark/input/fraud_dataset.csv"
+s3_path = "s3://cs6240-project-bucket-hajera-pyspark/input/fraud_dataset.csv"
 
 
 #Function to perform bagging and selection
@@ -187,17 +187,17 @@ voting_classifier_models_with_cwts = [lr1,lr2,lr3,lr4,lr5,lr6,lr8,lr9,lr10,lr11,
 
 
 # Inidivdual Model configuration for the Random Forest Classifier
-base_decision_tree_confiruation  = [DecisionTreeClassifier(max_depth =10, min_samples_split= 5, class_weight=class_weights)]
+base_decision_tree_confiruation  = [DecisionTreeClassifier(max_depth =20, min_samples_split= 5, class_weight=class_weights)]
 print(base_decision_tree_confiruation)
 
 
 # Configurae the base classifiers and count here -
-no_of_trees = 5
+no_of_trees = 50
 random_forest_classifier_models = base_decision_tree_confiruation*no_of_trees
 
 # Ensemble Type to be execulted
 model_list = random_forest_classifier_models
-bagging = False
+bagging = True
 
 
 

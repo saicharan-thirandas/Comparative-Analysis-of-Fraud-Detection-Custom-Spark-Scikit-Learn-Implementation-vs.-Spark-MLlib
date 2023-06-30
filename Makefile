@@ -10,8 +10,8 @@ hadoop.root=/usr/local/hadoop-3.3.5
 
 #app.name=Spark-Base-Ensemble
 #spark-main-file = src/spark-base/pyspark-spark-scikit.py
-app.name=Spark-MLLib-Ensemble
-spark-main-file = src/spark-mllib/pyspark_spark_mllib.py
+app.name=Spark-Base-Ensemble
+spark-main-file = src/spark-base/pyspark-spark-scikit.py
 
 
 
@@ -32,11 +32,11 @@ hdfs.output=output
 
 # AWS EMR Execution
 aws.emr.release=emr-6.10.0
-aws.bucket.name=cs6240-project-bucket-saicharan-pyspark
+aws.bucket.name=cs6240-project-bucket-hajera-pyspark
 aws.input=input
 aws.output=output
 aws.log.dir=log
-aws.num.nodes=1
+aws.num.nodes=6
 aws.conf=conf
 aws.src=src
 aws.instance.type=m4.xlarge
